@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agrishow 2026 — Executive Report</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+--agco-black: #111111;
+--agco-red: #C8102E;
+--bg-main: #f4f4f4;
+--bg-card: #ffffff;
+--ink: #222222;
+--muted: #666666;
+--border: #dddddd;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg-main); color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.7; }
+
+/* ═══ TRILINGUAL CSS TOGGLE ═══ */
+input[name="lang"] { display: none; }
+.lang-en, .lang-pt, .lang-es { display: none !important; }
+.btn-en, .btn-pt, .btn-es { padding: 6px 14px; border-radius: 20px; font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 12px; cursor: pointer; opacity: 0.5; color: #fff; display: inline-block; text-align: center; transition: all 0.3s ease; }
+#lang-en:checked ~ * span.lang-en, #lang-en:checked ~ * strong.lang-en { display: inline !important; }
+#lang-en:checked ~ * p.lang-en, #lang-en:checked ~ * div.lang-en, #lang-en:checked ~ * h4.lang-en { display: block !important; }
+#lang-en:checked ~ header .lang-switcher .btn-en { background: var(--agco-red); opacity: 1; }
+#lang-pt:checked ~ * span.lang-pt, #lang-pt:checked ~ * strong.lang-pt { display: inline !important; }
+#lang-pt:checked ~ * p.lang-pt, #lang-pt:checked ~ * div.lang-pt, #lang-pt:checked ~ * h4.lang-pt { display: block !important; }
+#lang-pt:checked ~ header .lang-switcher .btn-pt { background: var(--agco-red); opacity: 1; }
+#lang-es:checked ~ * span.lang-es, #lang-es:checked ~ * strong.lang-es { display: inline !important; }
+#lang-es:checked ~ * p.lang-es, #lang-es:checked ~ * div.lang-es, #lang-es:checked ~ * h4.lang-es { display: block !important; }
+#lang-es:checked ~ header .lang-switcher .btn-es { background: var(--agco-red); opacity: 1; }
+
+/* HEADER */
+header { background: var(--agco-black); color: #fff; padding: 56px 40px 48px; position: relative; overflow: hidden; }
+header::before { content: ''; position: absolute; top: -60px; right: -60px; width: 320px; height: 320px; border-radius: 50%; background: rgba(200,16,46,0.15); }
+header::after { content: ''; position: absolute; bottom: -40px; left: 10%; width: 180px; height: 180px; border-radius: 50%; background: rgba(255,255,255,0.03); }
+.top-bar { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; position: relative; z-index: 10; }
+.logo-container { background: #fff; display: inline-block; padding: 12px 24px; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+.lang-switcher { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 30px; display: flex; padding: 4px; gap: 4px; }
+.team-badge { display: inline-block; background: var(--agco-red); color: #fff; padding: 8px 16px; border-radius: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 24px; position: relative; z-index: 10; box-shadow: 0 4px 12px rgba(200,16,46,0.3); }
+.header-tag { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--agco-red); font-weight: 700; margin-bottom: 16px; position: relative; z-index: 10;}
+header h1 { font-family: 'Playfair Display', serif; font-size: clamp(32px,6vw,56px); font-weight: 900; line-height: 1.1; margin-bottom: 12px; position: relative; z-index: 10; }
+header h1 span { color: var(--agco-red); }
+.header-sub { font-size: 15px; color: rgba(255,255,255,0.75); max-width: 560px; margin-bottom: 32px; position: relative; z-index: 10; }
+.header-meta { display: flex; flex-wrap: wrap; gap: 24px; position: relative; z-index: 10; }
+.meta-pill { background: rgba(255,255,255,0.08); border: 1px solid rgba(200,16,46,0.4); border-radius: 24px; padding: 6px 16px; font-size: 13px; color: #fff; }
+.meta-pill strong { color: var(--agco-red); }
+
+/* LAYOUT */
+.container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+/* SOURCE BLOCK */
+.source-block { margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.source-block .src-text { font-size: 11px; color: var(--muted); font-style: italic; flex: 1; min-width: 160px; }
+.source-text-banner { font-size: 11.5px; color: rgba(255,255,255,0.7); margin-top: 16px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.2); }
+
+/* SENTIMENT BANNER */
+.sentiment-banner { background: linear-gradient(135deg,#000 0%,#630c17 100%); color: #fff; padding: 40px; margin: 40px 0 0; border-radius: 4px; border-left: 4px solid var(--agco-red); }
+.sentiment-banner h2 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--agco-red); margin-bottom: 14px; }
+.sentiment-banner p { font-size: 14.5px; line-height: 1.75; opacity: 0.9; margin-bottom: 10px; }
+.verdict-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 20px; margin-bottom: 20px; }
+.verdict-chip { padding: 8px 18px; border-radius: 4px; font-size: 13px; font-weight: 500; letter-spacing: 0.5px; }
+.chip-yellow { background: rgba(255,193,7,0.15); color: #ffc107; border: 1px solid #ffc107; }
+.chip-green { background: rgba(78,154,101,0.15); color: #4e9a65; border: 1px solid #4e9a65; }
+.chip-red { background: rgba(200,16,46,0.2); color: #ff6b81; border: 1px solid #C8102E; }
+
+/* NUMBERS */
+.numbers-bar { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin: 32px 0 8px; }
+.num-cell { background: var(--bg-card); padding: 20px 18px; text-align: center; }
+.num-val { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--agco-black); display: block; }
+.num-label { font-size: 11.5px; color: var(--muted); margin-top: 4px; letter-spacing: 0.3px; display: block; }
+.numbers-source { text-align: right; font-size: 11px; color: var(--muted); margin-bottom: 32px; font-style: italic; }
+
+/* SECTION */
+section { margin: 48px 0; }
+.section-label { font-size: 10.5px; letter-spacing: 3px; text-transform: uppercase; color: var(--agco-red); font-weight: 700; margin-bottom: 6px; }
+section > h2 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--agco-black); padding-bottom: 14px; border-bottom: 2px solid var(--border); margin-bottom: 28px; }
+
+/* CARD */
+.card { border: 1px solid var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 20px; background: var(--bg-card); transition: box-shadow 0.2s; }
+.card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+.card-head { display: flex; align-items: center; gap: 14px; padding: 16px 20px; background: #fdfdfd; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+.brand-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.card-head h3 { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--agco-black); flex: 1; }
+.card-badge { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; padding: 3px 10px; border-radius: 2px; font-weight: 600; }
+.badge-new { background: #fdf0f1; color: var(--agco-red); }
+.badge-world { background: #fff4d6; color: #8a6000; }
+.badge-concept { background: #eef0ff; color: #4455aa; }
+.badge-debut { background: #e0e0e0; color: #333; }
+.badge-green { background: #e8f5e9; color: #2e7d32; }
+.badge-tech { background: #e3f2fd; color: #1565c0; }
+.badge-agco { background: #fdf0f1; color: var(--agco-red); border: 1px solid rgba(200,16,46,0.3); }
+.card-body { padding: 18px 20px; }
+.card-body p { font-size: 14px; color: var(--ink); margin-bottom: 10px; line-height: 1.7; }
+.highlights { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+.tag { background: var(--bg-main); border: 1px solid var(--border); border-radius: 2px; padding: 3px 10px; font-size: 11.5px; color: var(--muted); }
+
+/* SPOTLIGHT */
+.spotlight { border: 2px solid var(--agco-red); border-radius: 4px; overflow: hidden; margin-bottom: 20px; background: var(--bg-card); }
+.spotlight .card-head { background: linear-gradient(90deg,#111 0%,#333 100%); border-bottom: 2px solid var(--agco-red); }
+.spotlight .card-head h3 { color: #fff; }
+.spotlight-tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--agco-red); font-weight: 700; margin-bottom: 4px; }
+
+/* CHART */
+.chart-wrap { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 28px 24px; margin-bottom: 20px; }
+.chart-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: var(--agco-black); margin-bottom: 20px; }
+.bar-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.bar-year { font-size: 12px; color: var(--muted); width: 36px; flex-shrink: 0; }
+.bar-outer { flex: 1; background: var(--bg-main); border-radius: 2px; height: 22px; overflow: hidden; }
+.bar-inner { height: 100%; border-radius: 2px; display: flex; align-items: center; padding-left: 8px; font-size: 11.5px; font-weight: 600; color: white; }
+.bar-2022 { background: #ccc; color: #333; } .bar-2023 { background: #aaa; color: #333; } .bar-2024 { background: #777; } .bar-2025 { background: #444; }
+.bar-2026 { background: linear-gradient(90deg,var(--agco-red),#8A0C20); }
+
+/* TREND GRID */
+.trend-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media(max-width:580px){.trend-grid{grid-template-columns:1fr;}}
+.trend-card { border: 1px solid var(--border); border-radius: 4px; padding: 20px; background: var(--bg-card); display: flex; flex-direction: column; }
+.trend-card h4 { font-family: 'Playfair Display', serif; font-size: 15px; color: var(--agco-black); margin-bottom: 8px; font-weight: 700; }
+.trend-card p { font-size: 13.5px; color: var(--muted); line-height: 1.65; flex-grow: 1; }
+
+/* PHOTO */
+.photo-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 20px; margin-top: 20px; }
+.photo-card { border: 1px solid var(--border); border-radius: 4px; overflow: hidden; background: var(--bg-card); display: flex; flex-direction: column; }
+.photo-card img { width: 100%; height: 220px; object-fit: cover; display: block; }
+.photo-desc { padding: 14px 16px; font-size: 13.5px; color: var(--ink); border-top: 1px solid var(--border); background: #fdfdfd; flex-grow: 1; }
+
+/* FOOTER */
+footer { background: var(--agco-black); color: rgba(255,255,255,0.6); text-align: center; padding: 32px 24px; font-size: 12px; margin-top: 64px; line-height: 1.8; }
+footer strong { color: var(--agco-red); }
+hr.fancy { border: none; height: 1px; background: linear-gradient(90deg,transparent,var(--agco-red),transparent); margin: 12px 0 28px; opacity: 0.3; }
+.source-text { font-size: 11px; color: var(--muted); font-style: italic; }
+</style>
+</head>
+<body>
+
+<input type="radio" name="lang" id="lang-en" checked>
+<input type="radio" name="lang" id="lang-pt">
+<input type="radio" name="lang" id="lang-es">
+
+<header>
+<div class="container">
+<div class="top-bar">
+<div class="logo-container">
+<img src="Captura de tela 2026-04-28 174757.png" alt="AGCO Your Agriculture Company" style="height:40px;display:block;">
+</div>
+<div class="lang-switcher">
+<label for="lang-en" class="btn-en">EN</label>
+<label for="lang-pt" class="btn-pt">PT</label>
+<label for="lang-es" class="btn-es">ES</label>
+</div>
+</div>
+
+<div class="team-badge">
+  <div style="margin-bottom: 2px;">
+    <span class="lang-en">Material developed by the Global Analytics AGCO team</span>
+    <span class="lang-pt">Material desenvolvido pela área de Global Analytics AGCO</span>
+    <span class="lang-es">Material desarrollado por el equipo de Global Analytics AGCO</span>
+  </div>
+  <div style="font-weight: 400; text-transform: none; font-size: 10px; letter-spacing: 0.5px; opacity: 0.9;">
+    <span class="lang-en">Developed by Thiago Montoro and Cassiano Moraes</span>
+    <span class="lang-pt">Desenvolvido por Thiago Montoro e Cassiano Moraes</span>
+    <span class="lang-es">Desarrollado por Thiago Montoro y Cassiano Moraes</span>
+  </div>
+</div>
+
+<p class="header-tag">
+<span class="lang-en">31st Edition · Comprehensive Report</span>
+<span class="lang-pt">31ª Edição · Relatório Completo</span>
+<span class="lang-es">31ª Edición · Reporte Completo</span>
+</p>
+<h1>Agrishow <span>2026</span></h1>
+<p class="header-sub">
+<span class="lang-en">Launches, innovations and market outlook from Latin America's largest agricultural technology fair — Ribeirão Preto, São Paulo, Brazil.</span>
+<span class="lang-pt">Lançamentos, inovações e perspetivas de mercado da maior feira de tecnologia agrícola da América Latina — Ribeirão Preto, São Paulo, Brasil.</span>
+<span class="lang-es">Lanzamientos, innovaciones y perspectivas de mercado de la mayor feria de tecnología agrícola de América Latina — Ribeirão Preto, São Paulo, Brasil.</span>
+</p>
+<div class="header-meta">
+<div class="meta-pill">📅 <strong><span class="lang-en">April 27 – May 1, 2026</span><span class="lang-pt">27 Abr – 1 Mai, 2026</span><span class="lang-es">27 Abr – 1 May, 2026</span></strong></div>
+<div class="meta-pill">📍 Ribeirão Preto, SP</div>
+<div class="meta-pill">🏷️ <span class="lang-en">Theme: <strong>"The Strength of Our Roots"</strong></span><span class="lang-pt">Tema: <strong>"A Força das Nossas Raízes"</strong></span><span class="lang-es">Tema: <strong>"La Fuerza de Nuestras Raíces"</strong></span></div>
+<div class="meta-pill">🏭 <strong>800+</strong> <span class="lang-en">brands</span><span class="lang-pt">marcas</span><span class="lang-es">marcas</span> · 520,000 m²</div>
+<div class="meta-pill">🌎 <strong>50+</strong> <span class="lang-en">countries</span><span class="lang-pt">países</span><span class="lang-es">países</span></div>
+</div>
+</div>
+</header>
+
+<div class="container">
+
+<div class="numbers-bar">
+<div class="num-cell"><span class="num-val">197k</span><span class="num-label lang-en">Expected visitors</span><span class="num-label lang-pt">Visitantes esperados</span><span class="num-label lang-es">Visitantes esperados</span></div>
+<div class="num-cell"><span class="num-val">800+</span><span class="num-label lang-en">Exhibiting brands</span><span class="num-label lang-pt">Marcas expositoras</span><span class="num-label lang-es">Marcas expositoras</span></div>
+<div class="num-cell"><span class="num-val">520k m²</span><span class="num-label lang-en">Exhibition area</span><span class="num-label lang-pt">Área de exposição</span><span class="num-label lang-es">Área de exhibición</span></div>
+<div class="num-cell"><span class="num-val">R$15.8B</span><span class="num-label lang-en">Deal intentions</span><span class="num-label lang-pt">Intenções de negócios</span><span class="num-label lang-es">Intenciones de negocios</span></div>
+<div class="num-cell"><span class="num-val">50+</span><span class="num-label lang-en">Countries present</span><span class="num-label lang-pt">Países presentes</span><span class="num-label lang-es">Países presentes</span></div>
+</div>
+<div class="numbers-source"><span class="lang-en">Source: Agrishow 2026 Official Organization</span><span class="lang-pt">Fonte: Organização Oficial Agrishow 2026</span><span class="lang-es">Fuente: Organización Oficial Agrishow 2026</span></div>
+
+<div class="sentiment-banner">
+<h2>📊 <span class="lang-en">Fair Mood: Cautious Optimism in a Tighter Market</span><span class="lang-pt">Clima da Feira: Otimismo Cauteloso num Mercado Mais Apertado</span><span class="lang-es">Clima de la Feria: Optimismo Cauteloso en un Mercado Más Ajustado</span></h2>
+<p class="lang-en">Agrishow 2026 opens against a noticeably more challenging macroeconomic backdrop. Agricultural machinery sales showed mixed Q1 2026 results: Tractors <strong>-9.5%</strong>, Harvesters <strong>-38.3%</strong>, Planters <strong>-30.1%</strong>, Sprayers <strong>+3.4%</strong> YoY — weighed down by expensive credit, falling soybean prices, rising input costs, and geopolitical uncertainty. Despite this, analysts project 7–8% growth in deal intentions toward R$15.6–15.8 billion.</p>
+<p class="lang-pt">A Agrishow 2026 abre num cenário macroeconómico mais desafiador. Vendas de máquinas no 1T2026: Tratores <strong>-9,5%</strong>, Colheitadeiras <strong>-38,3%</strong>, Plantadeiras <strong>-30,1%</strong>, Pulverizadores <strong>+3,4%</strong> — pressionadas por crédito caro, queda na soja e incerteza geopolítica. Ainda assim, analistas projetam crescimento de 7–8% nas intenções de negócios, rumo a R$15,6–15,8 bi.</p>
+<p class="lang-es">Agrishow 2026 abre en un escenario macroeconómico más desafiante. Ventas en el 1T2026: Tractores <strong>-9.5%</strong>, Cosechadoras <strong>-38.3%</strong>, Sembradoras <strong>-30.1%</strong>, Pulverizadoras <strong>+3.4%</strong> — presionadas por crédito caro, caída de la soja e incertidumbre geopolítica. Aún así, analistas proyectan un crecimiento de 7–8% en intenciones de negocios hacia R$15.6–15.8 mil millones.</p>
+<div class="verdict-row">
+<span class="verdict-chip chip-green">✅ <span class="lang-en">Innovation pipeline: strongest ever</span><span class="lang-pt">Pipeline de inovação: o mais forte de sempre</span><span class="lang-es">Pipeline de innovación: el más fuerte de siempre</span></span>
+<span class="verdict-chip chip-yellow">⚠️ <span class="lang-en">Buying sentiment: cautious</span><span class="lang-pt">Sentimento de compra: cauteloso</span><span class="lang-es">Sentimiento de compra: cauteloso</span></span>
+<span class="verdict-chip chip-red">📉 <span class="lang-en">Harvesters -38.3% | Tractors -9.5% | Planters -30.1% Q1 2026</span><span class="lang-pt">Colheitadeiras -38,3% | Tratores -9,5% | Plantadeiras -30,1% 1T2026</span><span class="lang-es">Cosechadoras -38.3% | Tractores -9.5% | Sembradoras -30.1% 1T2026</span></span>
+<span class="verdict-chip chip-green">📈 <span class="lang-en">Deal intentions 2026 target: +7–8%</span><span class="lang-pt">Meta intenções de negócios 2026: +7–8%</span><span class="lang-es">Meta intenciones de negocios 2026: +7–8%</span></span>
+</div>
+<div class="source-text-banner"><span class="lang-en">Source: Agrishow Organization, AEM Q1 2026 Data & Market Analysis</span><span class="lang-pt">Fonte: Organização Agrishow, Dados AEM 1º Trimestre 2026 & Análise de Mercado</span><span class="lang-es">Fuente: Organización Agrishow, Datos AEM 1T2026 & Análisis de Mercado</span></div>
+</div>
+
+<div class="chart-wrap">
+<p class="chart-title">📈 <span class="lang-en">Agrishow Business Intentions — Historical Trend (R$ billions)</span><span class="lang-pt">Intenções de Negócios Agrishow — Tendência Histórica (R$ bilhões)</span><span class="lang-es">Intenciones de Negocios Agrishow — Tendencia Histórica (R$ miles de millones)</span></p>
+<div class="bar-row"><span class="bar-year">2022</span><div class="bar-outer"><div class="bar-inner bar-2022" style="width:68%">R$12.8B</div></div></div>
+<div class="bar-row"><span class="bar-year">2023</span><div class="bar-outer"><div class="bar-inner bar-2023" style="width:74%">R$13.5B</div></div></div>
+<div class="bar-row"><span class="bar-year">2024</span><div class="bar-outer"><div class="bar-inner bar-2024" style="width:72%">R$13.6B</div></div></div>
+<div class="bar-row"><span class="bar-year">2025</span><div class="bar-outer"><div class="bar-inner bar-2025" style="width:78%">R$14.6B ↑7%</div></div></div>
+<div class="bar-row"><span class="bar-year">2026</span><div class="bar-outer"><div class="bar-inner bar-2026" style="width:84%">R$15.6–15.8B <span class="lang-en">target</span><span class="lang-pt">meta</span><span class="lang-es">meta</span> ↑7–8%</div></div></div>
+<div class="source-block" style="margin-top:12px;"><span class="src-text lang-en">Source: Agrishow Historical Data & 2026 Projections</span><span class="src-text lang-pt">Fonte: Dados Históricos Agrishow & Projeções 2026</span><span class="src-text lang-es">Fuente: Datos Históricos Agrishow & Proyecciones 2026</span></div>
+</div>
+
+<section>
+<p class="section-label"><span class="lang-en">Category 01</span><span class="lang-pt">Categoria 01</span><span class="lang-es">Categoría 01</span></p>
+<h2>🚜 <span class="lang-en">Heavy Machinery & Implements</span><span class="lang-pt">Máquinas Pesadas e Implementos</span><span class="lang-es">Maquinaria Pesada e Implementos</span></h2>
+
+<div class="card">
+<div class="card-head"><div class="brand-dot" style="background:#367c2b"></div><h3>John Deere</h3><span class="card-badge badge-new"><span class="lang-en">20+ Launches · Casa JD</span><span class="lang-pt">20+ Lançamentos · Casa JD</span><span class="lang-es">20+ Lanzamientos · Casa JD</span></span></div>
+<div class="card-body">
+<p class="lang-en">John Deere's 2026 appearance is one of the most ambitious in the brand's Brazilian history. The stand becomes an immersive <strong>"Casa John Deere"</strong> — demonstrating how equipment, digital platforms (Operations Center) and after-sales services operate as a single connected ecosystem. More than 20 launches cover combines, tractors, planters, sprayers and precision tech, with a strong push on the <strong>John Deere Operations Center</strong> for remote fleet management. The brand also announces satellite connectivity integration as a standard option across key models.</p>
+<p class="lang-pt">A presença da John Deere em 2026 é uma das mais ambiciosas da história da marca no Brasil. O estande torna-se o imersivo <strong>"Casa John Deere"</strong> — demonstrando como equipamentos, plataformas digitais (Operations Center) e serviços pós-venda operam como ecossistema conectado único. Mais de 20 lançamentos abrangem colheitadeiras, tratores, plantadeiras, pulverizadores e tecnologia de precisão, com forte aposta no <strong>John Deere Operations Center</strong> para gestão remota de frota. A marca também anuncia conectividade via satélite como opção padrão nos modelos principais.</p>
+<p class="lang-es">La presencia de John Deere en 2026 es una de las más ambiciosas en la historia de la marca en Brasil. El stand se convierte en el inmersivo <strong>"Casa John Deere"</strong> — demostrando cómo los equipos, plataformas digitales (Operations Center) y servicios posventa operan como un ecosistema conectado único. Más de 20 lanzamientos cubren cosechadoras, tractores, sembradoras, pulverizadoras y tecnología de precisión, con fuerte apuesta en el <strong>John Deere Operations Center</strong> para la gestión remota de flota.</p>
+<div class="highlights"><span class="tag">20+ launches</span><span class="tag">Operations Center</span><span class="tag"><span class="lang-en">Satellite connectivity</span><span class="lang-pt">Conectividade satélite</span><span class="lang-es">Conectividad satélite</span></span><span class="tag"><span class="lang-en">Full ecosystem strategy</span><span class="lang-pt">Estratégia ecossistema completo</span><span class="lang-es">Estrategia ecosistema completo</span></span></div>
+<div class="source-block"><span class="src-text lang-en">Source: John Deere Press Release / Agrishow Coverage</span><span class="src-text lang-pt">Fonte: Comunicado John Deere / Cobertura Agrishow</span><span class="src-text lang-es">Fuente: Comunicado John Deere / Cobertura Agrishow</span></div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-head"><div class="brand-dot" style="background:#003087"></div><h3>New Holland (CNH Industrial)</h3><span class="card-badge badge-world"><span class="lang-en">World's Largest Combine</span><span class="lang-pt">Maior Colheitadeira do Mundo</span><span class="lang-es">Mayor Cosechadora del Mundo</span></span></div>
+<div class="card-body">
+<p class="lang-en"><strong>CR 11 Combine — World's Largest:</strong> Commercially launched in Brazil at Agrishow, the CR 11 sets a new benchmark with the <strong>ForageCam AI vision</strong> system that analyzes crop flow in real time, adjusting threshing automatically. Integrated <strong>Starlink satellite connectivity</strong> enables 24/7 remote monitoring. New Holland also presents a <strong>Draper platform produced locally</strong> in Brazil (New Holland by MacDon), a full spraying portfolio, and new tractor models including the <strong>T7 CVT</strong> and <strong>T8</strong> for large-scale operations.</p>
+<p class="lang-pt"><strong>Colheitadeira CR 11 — Maior do Mundo:</strong> Lançada comercialmente no Brasil na Agrishow, a CR 11 define um novo padrão com o sistema de visão por IA <strong>ForageCam</strong> que analisa o fluxo da colheita em tempo real, ajustando a trilha automaticamente. A <strong>conectividade satélite Starlink</strong> integrada permite monitoramento remoto 24/7. A New Holland apresenta ainda uma <strong>plataforma Draper com produção nacional</strong> (New Holland by MacDon), portfólio completo de pulverização e novos tratores <strong>T7 CVT</strong> e <strong>T8</strong>.</p>
+<p class="lang-es"><strong>Cosechadora CR 11 — La Mayor del Mundo:</strong> Lanzada comercialmente en Brasil en Agrishow, la CR 11 establece un nuevo estándar con el sistema de visión IA <strong>ForageCam</strong> que analiza el flujo de la cosecha en tiempo real, ajustando la trilla automáticamente. La <strong>conectividad satelital Starlink</strong> integrada permite monitoreo remoto 24/7. New Holland también presenta una <strong>plataforma Draper de producción local</strong> (New Holland by MacDon) y nuevos tractores <strong>T7 CVT</strong> y <strong>T8</strong>.</p>
+<div class="highlights"><span class="tag">CR 11 (world's largest)</span><span class="tag">ForageCam AI vision</span><span class="tag">Starlink</span><span class="tag">New Holland by MacDon</span><span class="tag">T7 CVT / T8</span></div>
+<div class="source-block"><span class="src-text lang-en">Source: CNH Industrial / New Holland Agrishow 2026 Kit</span><span class="src-text lang-pt">Fonte: CNH Industrial / Material Oficial New Holland</span><span class="src-text lang-es">Fuente: CNH Industrial / Material Oficial New Holland</span></div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-head"><div class="brand-dot" style="background:#c41230"></div><h3>Case IH (CNH Industrial)</h3><span class="card-badge badge-world"><span class="lang-en">Largest Stand · 8,000 m²</span><span class="lang-pt">Maior Estande · 8.000 m²</span><span class="lang-es">Mayor Stand · 8.000 m²</span></span></div>
+<div class="card-body">
+<p class="lang-en">Case IH commands the <strong>largest stand at the fair</strong> (8,000 m²) with 20+ machines. The <strong>Austoft 9000 MY2026</strong> sugarcane harvester arrives with a 420cv Cursor 11 engine, factory-embedded connectivity, and the new Intelligent Feed Control system — redesigned hydraulics make feedrollers faster and improve billet length precision. The flagship <strong>Axial-Flow 160 Automation</strong> (Machine of the Year 2024) gains AccuTurn automatic headland maneuver, inter-machine map sharing, the <strong>FieldOps</strong> remote monitoring portal, and an embedded AI capable of <strong>1,800 daily interventions</strong>, handling up to 90% of operations autonomously. A dedicated ethanol area features the world's first two-row sugarcane harvester with an ethanol engine.</p>
+<p class="lang-pt">A Case IH comanda o <strong>maior estande da feira</strong> (8.000 m²) com mais de 20 máquinas. A colhedora de cana <strong>Austoft 9000 MY2026</strong> chega com motor Cursor 11 de 420cv, conectividade embarcada de fábrica e o novo sistema de Controle Inteligente de Alimentação — hidráulica redesenhada torna os rolos alimentadores mais rápidos e melhora a precisão do comprimento do rebolo. A <strong>Axial-Flow 160 Automation</strong> (Machine of the Year 2024) ganha manobra automática AccuTurn, partilha de mapas entre máquinas, o portal de monitoramento remoto <strong>FieldOps</strong> e IA embarcada capaz de <strong>1.800 intervenções diárias</strong>, assumindo até 90% das operação de forma autônoma. Uma área dedicada ao etanol apresenta a primeira colhedora de cana de duas linhas do mundo com motor a etanol.</p>
+<p class="lang-es">Case IH ocupa el <strong>mayor stand de la feria</strong> (8.000 m²) con más de 20 máquinas. La cosechadora de caña <strong>Austoft 9000 MY2026</strong> llega con motor Cursor 11 de 420cv, conectividad embarcada de fábrica y el nuevo sistema de Control Inteligente de Alimentación. La <strong>Axial-Flow 160 Automation</strong> (Máquina del Año 2024) gana maniobra automática AccuTurn, intercambio de mapas entre máquinas, el portal de monitoreo remoto <strong>FieldOps</strong> y IA embarcada capaz de <strong>1.800 intervenciones diarias</strong>, asumiendo hasta el 90% de las operaciones de forma autónoma. Un área dedicada al etanol presenta la primera cosechadora de caña de dos líneas del mundo con motor a etanol.</p>
+<div class="highlights"><span class="tag">Austoft 9000 MY2026 (420cv)</span><span class="tag">Axial-Flow 160 Automation</span><span class="tag">AccuTurn Auto Headland</span><span class="tag">FieldOps Portal</span><span class="tag">1,800 AI daily interventions / 90% autonomous</span><span class="tag"><span class="lang-en">World's 1st 2-row ethanol cane harvester</span><span class="lang-pt">1ª colhedora cana etanol 2 linhas</span><span class="lang-es">1ª cosechadora caña etanol 2 líneas</span></span></div>
+<div class="source-block"><span class="src-text lang-en">Source: CNH Industrial / Case IH Agrishow 2026 Press Kit</span><span class="src-text lang-pt">Fonte: Press Kit Case IH Agrishow 2026</span><span class="src-text lang-es">Fuente: Press Kit Case IH Agrishow 2026</span></div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-head"><div class="brand-dot" style="background:var(--agco-red)"></div><h3>Fendt (AGCO)</h3><span class="card-badge badge-agco"><span class="lang-en">Two Generations, One Fair</span><span class="lang-pt">Duas Gerações, Uma Feira</span><span class="lang-es">Dos Generaciones, Una Feria</span></span></div>
+<div class="card-body">
+<p class="lang-en"><strong>🆕 Fendt 800 Vario Gen5 (up to 343cv) — New Launch:</strong> Powered by the award-winning <strong>AGCO Power CORE 80</strong> engine — winner of <em>Diesel Engine of the Year 2026</em> — certified for <strong>HVO100 green diesel</strong>. Completely redesigned cab with <strong>FendtONE</strong> integrated operating system. Also presented alongside the <strong>Fendt Momentum</strong> planter (30 and 40-row versions) that reduces input overlap by up to 75%.<br><strong>Fendt 1000 Vario Gen4 (440–550cv):</strong> MAN 12.4L engine. New <em>Fendt Workgroup</em> feature allows multiple tractors to share operational data wirelessly in real time. A <strong>Corn Ethanol Tractor</strong> rounds out AGCO's renewable energy positioning.</p>
+<p class="lang-pt"><strong>🆕 Fendt 800 Vario Gen5 (até 343cv) — Novo Lançamento:</strong> Equipado com o premiado motor <strong>AGCO Power CORE 80</strong> — vencedor do <em>Motor a Diesel do Ano 2026</em> — certificado para <strong>HVO100 diesel verde</strong>. Cabine completamente redesenhada com sistema integrado <strong>FendtONE</strong>. Apresentado também com a plantadeira <strong>Fendt Momentum</strong> (versões de 30 e 40 linhas) que reduz a sobreposição de insumos em até 75%.<br><strong>Fendt 1000 Vario Gen4 (440–550cv):</strong> Motor MAN 12.4L. O novo <em>Fendt Workgroup</em> permite que vários tratores partilhem dados operacionais em tempo real. Um <strong>Trator a Etanol de Milho</strong> completa o posicionamento de energia renovável da AGCO.</p>
+<p class="lang-es"><strong>🆕 Fendt 800 Vario Gen5 (hasta 343cv) — Nuevo Lanzamiento:</strong> Equipado con el premiado motor <strong>AGCO Power CORE 80</strong> — ganador del <em>Motor Diésel del Año 2026</em> — certificado para <strong>HVO100 diésel verde</strong>. Cabina completamente rediseñada con el sistema integrado <strong>FendtONE</strong>. También se presenta la sembradora <strong>Fendt Momentum</strong> (versiones de 30 y 40 líneas) que reduce la superposición de insumos hasta un 75%.<br><strong>Fendt 1000 Vario Gen4 (440–550cv):</strong> Motor MAN 12.4L. El nuevo <em>Fendt Workgroup</em> permite que varios tractores compartan datos operativos en tiempo real. Un <strong>Tractor a Etanol de Maíz</strong> completa el posicionamiento de energía renovable de AGCO.</p>
+<div class="highlights"><span class="tag">800 Vario Gen5 (343cv)</span><span class="tag">CORE 80 — Diesel of the Year 2026</span><span class="tag">HVO100</span><span class="tag">FendtONE</span><span class="tag">Fendt Momentum (−75% overlap)</span><span class="tag">Fendt Workgroup</span><span class="tag"><span class="lang-en">Corn ethanol tractor</span><span class="lang-pt">Trator etanol de milho</span><span class="lang-es">Tractor etanol de maíz</span></span></div>
+<div class="source-block"><span class="src-text lang-en">Source: AGCO / Fendt Official Communication / TractorEvolution</span><span class="src-text lang-pt">Fonte: AGCO / Comunicação Oficial Fendt / TractorEvolution</span><span class="src-text lang-es">Fuente: AGCO / Comunicación Oficial Fendt / TractorEvolution</span></div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-head"><div class="brand-dot" style="background:var(--agco-red)"></div><h3>Massey Ferguson (AGCO)</h3><span class="card-badge badge-agco"><span class="lang-en">Brazil's Most Powerful MF Ever</span><span class="lang-pt">O MF Mais Potente do Brasil</span><span class="lang-es">El MF Más Potente de Brasil</span></span></div>
+<div class="card-body">
+<p class="lang-en"><strong>MF 9S.425 — Brazilian Debut:</strong> The most powerful Massey Ferguson ever sold in Brazil. AGCO Power 8.4L engine with <strong>Protec U</strong> concept — engine physically separated from cab — reducing heat and noise. CVT transmission, hydraulic flow up to 400 L/min, rear lift of 12,000 kg. <strong>Ethanol engine developed in Brazil</strong> with up to 90% CO₂ reduction potential. The brand also expands precision access with the <strong>MF 5M series</strong> (105–145cv) shipping factory-ready with autopilot and <strong>MF Connect</strong> telemetry — technologies previously exclusive to larger machines. The <strong>Momentum planter</strong> completes the ecosystem, connecting seeding data with tractor management.</p>
+<p class="lang-pt"><strong>MF 9S.425 — Estreia Brasileira:</strong> O Massey Ferguson mais potente já vendido no Brasil. Motor AGCO Power 8.4L com conceito <strong>Protec U</strong> — motor fisicamente separado da cabine — reduzindo calor e ruído. Transmissão CVT, vazão hidráulica até 400 L/min, levante traseiro de 12.000 kg. <strong>Motor a Etanol desenvolvido no Brasil</strong> com potencial de redução de CO₂ de até 90%. A marca também expande acesso à precisão com a <strong>série MF 5M</strong> (105–145cv) saindo de fábrica com piloto automático e telemetria <strong>MF Connect</strong> — antes restritas a máquinas maiores. A <strong>plantadeira Momentum</strong> completa o ecossistema.</p>
+<p class="lang-es"><strong>MF 9S.425 — Estreno Brasileño:</strong> El Massey Ferguson más potente jamás vendido en Brasil. Motor AGCO Power 8.4L con concepto <strong>Protec U</strong> — motor físicamente separado de la cabina — reduciendo calor y ruido. Transmisión CVT, flujo hidráulico hasta 400 L/min, levante trasero de 12.000 kg. <strong>Motor a Etanol desarrollado en Brasil</strong> con potencial de reducción de CO₂ de hasta el 90%. La marca también amplía el acceso a la precisión con la <strong>serie MF 5M</strong> (105–145cv) saliendo de fábrica con piloto automático y telemetría <strong>MF Connect</strong>.</p>
+<div class="highlights"><span class="tag">MF 9S.425 — CVT — 12,000 kg lift</span><span class="tag">Protec U (engine-cab isolation)</span><span class="tag"><span class="lang-en">Ethanol engine −90% CO₂</span><span class="lang-pt">Motor etanol −90% CO₂</span><span class="lang-es">Motor etanol −90% CO₂</span></span><span class="tag">MF 5M (105–145cv) + autopilot</span><span class="tag">MF Connect telemetry</span><span class="tag">Momentum Planter</span></div>
+<div class="source-block"><span class="src-text lang-en">Source: AGCO / Massey Ferguson / TractorEvolution / MF Zanini</span><span class="src-text lang-pt">Fonte: AGCO / Massey Ferguson / TractorEvolution / MF Zanini</span><span class="src-text lang-es">Fuente: AGCO / Massey Ferguson / TractorEvolution / MF Zanini</span></div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-head"><div class="brand-dot" style="background:var(--agco-red)"></div><h3>Valtra (AGCO)</h3><span class="card-badge badge-agco"><span class="lang-en">M5 Launch + A5 HiTech + AI Tractor</span><span class="lang-pt">Lançamento M5 + A5 HiTech + Trator com IA</span><span class="lang-es">Lanzamiento M5 + A5 HiTech + Tractor IA</span></span></div>
+<div class="card-body">
+<p class="lang-en"><strong>🆕 Valtra M5 Series — "Evolution of the Legend":</strong> Launched at Agrishow 2026, the M165 (165cv) and M185 (185cv) are described as the evolution of the legendary Valtra BH series. The M5 features robust AGCO Power engines, modern cabin with integrated cooler box, and a <strong>Special Sugarcane Kit</strong> (protection and durability for harsh cane environments). Hydraulic <strong>Valtra Guide by Trimble</strong> autopilot and PowerShift HiTech4 transmission (clutch-free shifting) are standard on HiTech versions.<br><strong>🆕 Valtra A5 and A5 HiTech:</strong> Renewed design, more efficient AGCO Power engines, hydraulic autopilot and PowerShift HiTech4. Also: the <strong>Valtra Talking Tractor</strong> — AI voice/text assistant (see Category 02) and the <strong>Valtra Serie M</strong> positioning for the sugarcane sector.</p>
+<p class="lang-pt"><strong>🆕 Valtra Série M5 — "A Evolução da Lenda":</strong> Lançada na Agrishow 2026, a M165 (165cv) e M185 (185cv) são descritas como a evolução da lendária série Valtra BH. A M5 apresenta robustos motores AGCO Power, cabine moderna com caixa refrigeradora integrada e <strong>Kit Canavieiro Especial</strong> (proteção e durabilidade para ambientes de canavial). Piloto automático hidráulico <strong>Valtra Guide by Trimble</strong> e transmissão PowerShift HiTech4 (troca de marchas sem embreagem) são padrão nas versões HiTech.<br><strong>🆕 Valtra A5 e A5 HiTech:</strong> Design renovado, motores AGCO Power mais eficientes, piloto automático hidráulico e PowerShift HiTech4. Além disso: o <strong>Valtra Talking Tractor</strong> — assistente IA por voz/texto (ver Categoria 02).</p>
+<p class="lang-es"><strong>🆕 Valtra Serie M5 — "La Evolución de la Leyenda":</strong> Lanzada en Agrishow 2026, la M165 (165cv) y M185 (185cv) son descritas como la evolución de la legendaria serie Valtra BH. La M5 presenta robustos motores AGCO Power, cabina moderna con caja refrigeradora integrada y <strong>Kit Cañero Especial</strong>. Piloto automático hidráulico <strong>Valtra Guide by Trimble</strong> y transmisión PowerShift HiTech4 son estándar en versiones HiTech.<br><strong>🆕 Valtra A5 y A5 HiTech:</strong> Diseño renovado, motores AGCO Power más eficientes, piloto automático hidráulico y PowerShift HiTech4.</p>
+<div class="highlights"><span class="tag">M165 / M185 (M5 Series)</span><span class="tag">Valtra Guide by Trimble</span><span class="tag">PowerShift HiTech4</span><span class="tag"><span class="lang-en">Sugarcane Kit</span><span class="lang-pt">Kit Canavieiro</span><span class="lang-es">Kit Cañero</span></span><span class="tag">A5 HiTech</span><span class="tag">Talking Tractor (AI)</span><span class="tag"><span class="lang-en">Biometanol / Ethanol options</span><span class="lang-pt">Opções biometanol / etanol</span><span class="lang-es">Opciones biometanol / etanol</span></span></div>
+<div class="source-block"><span class="src-text lang-en">Source: Cana Online / Agrishow Official / AutoInforme / TractorEvolution</span><span class="src-text lang-pt">Fonte: Cana Online / Agrishow Oficial / AutoInforme / TractorEvolution</span><span class="src-text lang-es">Fuente: Cana Online / Agrishow Oficial / AutoInforme / TractorEvolution</span></div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-head"><div class="brand-dot" style="background:#005bab"></div><h3>Jacto</h3><span class="card-badge badge-world"><span class="lang-en">Autonomous Sprayer + Cane Harvester Debut</span><span class="lang-pt">Pulverizador Autônomo + Estreia na Cana</span><span class="lang-es">Pulverizador Autónomo + Debut en Caña</span></span></div>
+<div class="card-body">
+<p class="lang-en"><strong>🆕 Arbus 4000 JAV — Autonomous Sprayer, now for sale (R$ 1.7M):</strong> After <strong>16,000+ validated hours</strong> across nearly 60,000 hectares, the JAV goes commercial. Operates 24h/day without an on-board operator — controlled remotely via tablet from anywhere on the farm. Laser sensors scan plant canopy in real time (size, spacing, leaf mass), automatically adjusting the 6-fan variable-rate application system. AI creates a virtual field model. "Follow the leader" and <strong>convoy mode</strong> (1 operator manages up to 4 machines simultaneously) radically reduce labor needs. Telemetry shared in real time via <strong>Jacto Connect</strong>. Complies with international safety standards for autonomous agricultural vehicles.<br><strong>🆕 Hover 500 — First Jacto sugarcane harvester (2-row, 470cv):</strong> Double the throughput per hour vs single-row machines. Up to <strong>35% less fuel per tonne of cane</strong>. 16-inch wide mats fit standard cane row spacing. Platform follows lateral slope independently for minimal uprooting and clean ground cuts. Developed with Citrosuco to compete directly with John Deere and Case IH in this high-barrier segment.</p>
+<p class="lang-pt"><strong>🆕 Arbus 4000 JAV — Pulverizador Autônomo, à venda (R$ 1,7M):</strong> Após <strong>mais de 16.000 horas validadas</strong> em quase 60.000 hectares, o JAV entra em comercialização. Opera 24h/dia sem operador a bordo — controlado via tablet de qualquer ponto da fazenda. Sensores a laser escaneiam a copa das plantas em tempo real (tamanho, espaçamento, massa foliar), ajustando automaticamente o sistema de aplicação variável com 6 ventiladores. A IA cria um modelo virtual da lavoura. O modo "siga o líder" e o <strong>comboio</strong> (1 operador gerencia até 4 máquinas simultaneamente) reduzem drasticamente a necessidade de mão de obra. Telemetria compartilhada em tempo real via <strong>Jacto Connect</strong>. Cumpre normas internacionais de segurança para veículos agrícolas autônomos.<br><strong>🆕 Hover 500 — Primeira colhedora de cana da Jacto (2 linhas, 470cv):</strong> O dobro de produção por hora vs máquinas de 1 linha. Até <strong>35% menos combustível por tonelada de cana</strong>. Esteiras de 16 polegadas respeitam o espaçamento padrão do canavial. Plataforma acompanha a inclinação lateral do terreno de forma independente para corte rente ao solo com mínimo arranquio. Desenvolvida com a Citrosuco para competir com John Deere e Case IH.</p>
+<p class="lang-es"><strong>🆕 Arbus 4000 JAV — Pulverizador Autónomo, a la venta (R$ 1.7M):</strong> Tras <strong>más de 16.000 horas validadas</strong> en casi 60.000 hectáreas, el JAV entra en comercialización. Opera 24h/día sin operador a bordo — controlado vía tablet desde cualquier punto de la finca. Sensores láser escanean el dosel de las plantas en tiempo real, ajustando automáticamente el sistema de aplicación variable de 6 ventiladores. La IA crea un modelo virtual del cultivo. El modo <strong>convoy</strong> (1 operador gestiona hasta 4 máquinas simultáneamente) reduce drásticamente la necesidad de mano de obra. Telemetría compartida en tiempo real vía <strong>Jacto Connect</strong>.<br><strong>🆕 Hover 500 — Primera cosechadora de caña de Jacto (2 líneas, 470cv):</strong> El doble de producción por hora vs máquinas de 1 línea. Hasta <strong>35% menos combustible por tonelada de caña</strong>. Desarrollada con Citrosuco para competir directamente con John Deere y Case IH.</p>
+<div class="highlights"><span class="tag">Arbus 4000 JAV · 24h autonomous</span><span class="tag">16,000+ validated hours</span><span class="tag"><span class="lang-en">Convoy: 1 op / 4 machines</span><span class="lang-pt">Comboio: 1 op / 4 máquinas</span><span class="lang-es">Convoy: 1 op / 4 máquinas</span></span><span class="tag">6-fan variable rate AI</span><span class="tag">R$ 1.7M</span><span class="tag">Hover 500 · 470cv · 2-row</span><span class="tag">−35% fuel/tonne cane</span><span class="tag">Jacto Connect</span></div>
+<div class="source-block"><span class="src-text lang-en">Source: Canal Rural / Agfeed / Revista Cultivar / SpaceMoney / Jacto Official</span><span class="src-text lang-pt">Fonte: Canal Rural / Agfeed / Revista Cultivar / SpaceMoney / Jacto Oficial</span><span class="src-text lang-es">Fuente: Canal Rural / Agfeed / Revista Cultivar / SpaceMoney / Jacto Oficial</span></div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-head"><div class="brand-dot" style="background:#1a5c96"></div><h3>Baldan</h3><span class="card-badge badge-new"><span class="lang-en">Founding Brand · Avola Sugarcane Sprayer</span><span class="lang-pt">Marca Fundadora · Avola para Cana</span><span class="lang-es">Marca Fundadora · Avola para Caña</span></span></div>
+<div class="card-body">
+<p class="lang-en">Baldan — one of the <strong>four founding companies of Agrishow</strong> alongside Marchesan, Jacto and Jumil — arrives for the 2026 edition focused on expanding into sugarcane and presenting a new planting generation. CEO <strong>Fernando Capra</strong> defines this as <em>"the most challenging Agrishow in years"</em>, but doubles down on product innovation and flexible financing. The <strong>🆕 Avola 3,000L self-propelled sugarcane sprayer</strong> is adapted from the proven grain platform, Baldan's strategic entry into the sugar-energy sector. The <strong>🆕 new planting generation</strong> combines technology and affordability for producers focused on efficiency over volume expansion.</p>
+<p class="lang-pt">A Baldan — uma das <strong>quatro empresas fundadoras da Agrishow</strong> junto com Marchesan, Jacto e Jumil — chega à edição 2026 focada na expansão para cana e nova geração de plantio. O CEO <strong>Fernando Capra</strong> define esta como <em>"a Agrishow mais desafiadora dos últimos anos"</em>, mas aposta em inovação e financiamento flexível. O <strong>🆕 pulverizador autopropelido Avola 3.000L</strong> é adaptado da plataforma de grãos, a entrada estratégica da Baldan no setor sucroenergético. A <strong>🆕 nova geração de plantio</strong> combina tecnologia e acessibilidade para produtores focados em eficiência.</p>
+<p class="lang-es">Baldan — una de las <strong>cuatro empresas fundadoras de Agrishow</strong> junto con Marchesan, Jacto y Jumil — llega a la edición 2026 enfocada en la expansión hacia la caña de azúcar y una nueva generación de plantío. El CEO <strong>Fernando Capra</strong> define esta como <em>"la Agrishow más desafiante de los últimos años"</em>, pero apuesta por innovación de productos y financiamiento flexible. El <strong>🆕 pulverizador autopropulsado Avola 3.000L</strong> es adaptado de la plataforma de granos, la entrada estratégica de Baldan en el sector sucroalcoholero.</p>
+<div class="highlights"><span class="tag">Avola 3,000L (cane sprayer)</span><span class="tag"><span class="lang-en">New planting generation</span><span class="lang-pt">Nova geração de plantio</span><span class="lang-es">Nueva generación de plantío</span></span><span class="tag"><span class="lang-en">Agrishow founding brand (1993)</span><span class="lang-pt">Marca fundadora Agrishow (1993)</span><span class="lang-es">Marca fundadora Agrishow (1993)</span></span><span class="tag"><span class="lang-en">Flexible financing package</span><span class="lang-pt">Financiamento flexível</span><span class="lang-es">Financiamiento flexible</span></span></div>
+<div class="source-block"><span class="src-text lang-en">Source: Brasilagro / Agrofy News / Revista Cultivar</span><span class="src-text lang-pt">Fonte: Brasilagro / Agrofy News / Revista Cultivar</span><span class="src-text lang-es">Fuente: Brasilagro / Agrofy News / Revista Cultivar</span></div>
+</div>
+</div>
+
+</section>
+
+<hr class="fancy">
+
+<section>
+<p class="section-label"><span class="lang-en">Category 02</span><span class="lang-pt">Categoria 02</span><span class="lang-es">Categoría 02</span></p>
+<h2>🤖 <span class="lang-en">AI, Robotics & Autonomous Systems</span><span class="lang-pt">IA, Robótica e Sistemas Autônomos</span><span class="lang-es">IA, Robótica y Sistemas Autónomos</span></h2>
+
+<div class="spotlight">
+<div class="card-head"><div class="brand-dot" style="background:var(--agco-red)"></div><h3>⭐ Valtra (AGCO) — Talking Tractor</h3><span class="card-badge badge-concept"><span class="lang-en">Concept · AI Debut in Brazil</span><span class="lang-pt">Conceito · Estreia da IA no Brasil</span><span class="lang-es">Concepto · Estreno IA en Brasil</span></span></div>
+<div class="card-body">
+<p class="spotlight-tag">🌟 <span class="lang-en">Fair Highlight — First Presentation in Brazil</span><span class="lang-pt">Destaque da Feira — Primeira Apresentação no Brasil</span><span class="lang-es">Destacado de la Feria — Primera Presentación en Brasil</span></p>
+<p class="lang-en"><strong>What it is:</strong> An AI-powered voice and text assistant integrated directly into the tractor cab via a tablet linked to the <strong>Valtra Connect</strong> platform, understanding natural language in Brazilian Portuguese and Spanish — trained specifically with Brazilian agricultural data and use cases.</p>
+<p class="lang-pt"><strong>O que é:</strong> Assistente de voz e texto com IA integrado diretamente na cabine via tablet ligado à plataforma <strong>Valtra Connect</strong>, compreendendo linguagem natural em Português do Brasil e Espanhol — treinado especificamente com dados e casos de uso agrícolas brasileiros.</p>
+<p class="lang-es"><strong>Qué es:</strong> Un asistente de voz y texto con IA integrado directamente en la cabina vía tablet conectada a la plataforma <strong>Valtra Connect</strong>, comprendiendo lenguaje natural en Portugués de Brasil y Español — entrenado específicamente con datos y casos de uso agrícolas brasileños.</p>
+<p class="lang-en"><strong>What it does:</strong> Operators ask questions while working — about fuel consumption, carbon emissions, maintenance schedules, or operational performance. The assistant translates complex telemetry data into actionable visual formats (illustrated checklists, charts). Represents the first fully localized in-cab AI assistant for the Brazilian agricultural market.</p>
+<p class="lang-pt"><strong>O que faz:</strong> Os operadores fazem perguntas enquanto trabalham — sobre consumo de combustível, emissões de carbono, agendas de manutenção ou desempenho operacional. O assistente traduz dados complexos de telemetria em formatos visuais acionáveis (checklists ilustrados, gráficos). Representa o primeiro assistente de IA na cabine totalmente localizado para o mercado agrícola brasileiro.</p>
+<p class="lang-es"><strong>Qué hace:</strong> Los operadores hacen preguntas mientras trabajan — sobre consumo de combustible, emisiones de carbono, agendas de mantenimiento o desempeño operacional. El asistente traduce datos complejos de telemetría en formatos visuales accionables (listas de verificación ilustradas, gráficos). Representa el primer asistente IA en cabina totalmente localizado para el mercado agrícola brasileño.</p>
+<div class="highlights"><span class="tag"><span class="lang-en">Voice + text AI</span><span class="lang-pt">IA voz + texto</span><span class="lang-es">IA voz + texto</span></span><span class="tag">PT-BR / ES natural language</span><span class="tag">Valtra Connect platform</span><span class="tag"><span class="lang-en">Brazilian ag-data trained</span><span class="lang-pt">Treinado dados agro BR</span><span class="lang-es">Entrenado dados agro BR</span></span><span class="tag"><span class="lang-en">1st localized in-cab AI in Brazil</span><span class="lang-pt">1º IA cabine localizada no Brasil</span><span class="lang-es">1ª IA cabina localizada en Brasil</span></span></div>
+<div class="source-block"><span class="src-text lang-en">Source: AGCO / Valtra Agrishow 2026 Concept Showcase</span><span class="src-text lang-pt">Fonte: AGCO / Showcase Valtra Agrishow 2026</span><span class="src-text lang-es">Fuente: AGCO / Showcase Valtra Agrishow 2026</span></div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-head"><div class="brand-dot" style="background:#1a7abf"></div><h3>Solinftec</h3><span class="card-badge badge-new"><span class="lang-en">Physical AI · Solix XT & XC</span><span class="lang-pt">IA Física · Solix XT & XC</span><span class="lang-es">IA Física · Solix XT & XC</span></span></div>
+<div class="card-body">
+<p class="lang-en">Solinftec expands its autonomous robot portfolio with the <strong>Solix XT</strong> and <strong>Solix XC</strong> — two new models designed for continuous, integrated field operation. These machines embody "physical AI": intelligence that moves beyond data analysis to execute decisions directly in the field 24/7 without human operators. The robots integrate with Solinftec's farm management platform for a unified view of all field operations, connecting robotic data with agronomic decision support tools.</p>
+<p class="lang-pt">A Solinftec expande o seu portfólio com os robôs autónomos <strong>Solix XT</strong> e <strong>Solix XC</strong> — dois novos modelos projetados para operação contínua e integrada no campo. Estas máquinas incorporam a "IA física": inteligência que vai além da análise de dados para executar decisões diretamente no campo 24/7 sem operadores humanos. Os robôs integram-se com a plataforma de gestão agrícola da Solinftec para uma visão unificada de todas as operações de campo.</p>
+<p class="lang-es">Solinftec expande su portafolio de robots autónomos con el <strong>Solix XT</strong> y <strong>Solix XC</strong> — dos nuevos modelos diseñados para operación continua e integrada en el campo. Estas máquinas encarnan la "IA física": inteligencia que va más allá del análisis de datos para ejecutar decisiones directamente en el campo 24/7 sin operadores humanos.</p>
+<div class="highlights"><span class="tag">Solix XT</span><span class="tag">Solix XC</span><span class="tag">24/7 autonomous field ops</span><span class="tag"><span class="lang-en">Farm management integration</span><span class="lang-pt">Integração gestão agrícola</span><span class="lang-es">Integración gestión agrícola</span></span></div>
+<div class="source-block"><span class="src-text lang-en">Source: Solinftec Official / Band Agro</span><span class="src-text lang-pt">Fonte: Solinftec Oficial / Band Agro</span><span class="src-text lang-es">Fuente: Solinftec Oficial / Band Agro</span></div>
+</div>
+</div>
+
+</section>
+
+<hr class="fancy">
+
+<section>
+<p class="section-label"><span class="lang-en">Category 03</span><span class="lang-pt">Categoria 03</span><span class="lang-es">Categoría 03</span></p>
+<h2>⚡ <span class="lang-en">Vehicles, Clean Energy & Mobility</span><span class="lang-pt">Veículos, Energia Limpa e Mobilidade</span><span class="lang-es">Vehículos, Energía Limpia y Movilidad</span></h2>
+
+<div class="card">
+<div class="card-head"><div class="brand-dot" style="background:#d4001e"></div><h3>GWM — Tank 300 Flex</h3><span class="card-badge badge-world"><span class="lang-en">World's First Flex PHEV</span><span class="lang-pt">Primeiro PHEV Flex do Mundo</span><span class="lang-es">Primer PHEV Flex del Mundo</span></span></div>
+<div class="card-body">
+<p class="lang-en">GWM chose Agrishow 2026 for the Brazilian debut of the <strong>Tank 300 Flex</strong> — the <strong>world's first flex plug-in hybrid electric vehicle</strong>. First revealed globally at the <em>Beijing Auto Show 2026</em> just days before Agrishow, the model combines a <strong>2.0 turbo engine (Miller cycle)</strong> with an electric motor integrated into a 9-speed gearbox. Combined output: <strong>394cv / 750 Nm</strong>. Runs on ethanol or gasoline. Price: <strong>R$ 342,000</strong> (MY2027), already available at dealers. GWM erected a <strong>700 m² stand</strong> with an off-road test drive circuit in dirt. The choice of Agrishow is strategic — the fair has deep ties to the sugar-energy sector, where ethanol as fuel is most relevant.</p>
+<p class="lang-pt">A GWM escolheu a Agrishow 2026 para a estreia brasileira do <strong>Tank 300 Flex</strong> — o <strong>primeiro PHEV flex do mundo</strong>. Revelado globalmente no <em>Salão de Pequim 2026</em> poucos dias antes da Agrishow, o modelo combina um <strong>motor 2.0 turbo (ciclo Miller)</strong> com motor elétrico integrado ao câmbio de 9 marchas. Potência combinada: <strong>394cv / 750 Nm</strong>. Roda a etanol ou gasolina. Preço: <strong>R$ 342.000</strong> (linha 2027), já disponível nas concessionárias. A GWM montou um <strong>estande de 700 m²</strong> com circuito de test drive off-road em terra. A escolha da Agrishow é estratégica — a feira tem laços profundos com o setor sucroenergético, onde o etanol como combustível é mais relevante.</p>
+<p class="lang-es">GWM eligió Agrishow 2026 para el debut brasileño del <strong>Tank 300 Flex</strong> — el <strong>primer PHEV flex del mundo</strong>. Revelado globalmente en el <em>Salón de Pekín 2026</em> días antes de Agrishow, el modelo combina un <strong>motor 2.0 turbo (ciclo Miller)</strong> con un motor eléctrico integrado en la caja de 9 marchas. Potencia combinada: <strong>394cv / 750 Nm</strong>. Funciona con etanol o gasolina. Precio: <strong>R$ 342.000</strong> (línea 2027), ya disponible en concesionarios. GWM montó un <strong>stand de 700 m²</strong> con circuito de test drive off-road en tierra.</p>
+<div class="highlights"><span class="tag"><span class="lang-en">World's 1st Flex PHEV</span><span class="lang-pt">1º PHEV Flex do mundo</span><span class="lang-es">1er PHEV Flex del mundo</span></span><span class="tag">394cv / 750 Nm combined</span><span class="tag">2.0 turbo Miller cycle + electric</span><span class="tag">Ethanol + gasoline flex</span><span class="tag">R$ 342,000 (MY2027)</span><span class="tag">700 m² stand + off-road track</span></div>
+<div class="source-block"><span class="src-text lang-en">Source: SEGS / Auto+ TV / Money Times / AutoInforme</span><span class="src-text lang-pt">Fonte: SEGS / Auto+ TV / Money Times / AutoInforme</span><span class="src-text lang-es">Fuente: SEGS / Auto+ TV / Money Times / AutoInforme</span></div>
+</div>
+</div>
+
+</section>
+
+<hr class="fancy">
+
+<section>
+<p class="section-label"><span class="lang-en">Big Picture</span><span class="lang-pt">Visão Geral</span><span class="lang-es">Visión General</span></p>
+<h2>🌾 <span class="lang-en">Overarching Themes of Agrishow 2026</span><span class="lang-pt">Temas Centrais da Agrishow 2026</span><span class="lang-es">Temas Centrales de Agrishow 2026</span></h2>
+<div class="trend-grid">
+
+<div class="trend-card">
+<h4>🤖 <span class="lang-en">Physical AI</span><span class="lang-pt">IA Física</span><span class="lang-es">IA Física</span></h4>
+<p class="lang-en">AI is no longer just a data analysis layer — it executes decisions in the field via autonomous robots (Jacto JAV, Solinftec Solix, PTx OutRun) and in-cab voice assistants (Valtra Talking Tractor). Commercially viable, not just concepts.</p>
+<p class="lang-pt">A IA já não é apenas uma camada de análise de dados — executa decisões no campo via robôs autónomos (Jacto JAV, Solinftec Solix, PTx OutRun) e assistentes de voz na cabine (Valtra Talking Tractor). Comercialmente viável, não apenas conceitos.</p>
+<p class="lang-es">La IA ya no es solo una capa de análisis de datos — ejecuta decisiones en el campo vía robots autónomos (Jacto JAV, Solinftec Solix, PTx OutRun) y asistentes de voz en la cabina (Valtra Talking Tractor). Comercialmente viable, no solo conceptos.</p>
+<div class="source-block" style="margin-top:auto;"><span class="src-text lang-en">Source: Market Analysis / Agrishow 2026</span><span class="src-text lang-pt">Fonte: Análise de Mercado / Agrishow 2026</span><span class="src-text lang-es">Fuente: Análisis de Mercado / Agrishow 2026</span></div>
+</div>
+
+<div class="trend-card">
+<h4>⚡ <span class="lang-en">Brazil's Biofuel Advantage Goes Global</span><span class="lang-pt">A Vantagem do Biocombustível Vai ao Mundo</span><span class="lang-es">La Ventaja del Biocombustible Va al Mundo</span></h4>
+<p class="lang-en">Fendt's corn ethanol tractor, Massey's Brazil-made ethanol engine (−90% CO₂), Case IH's ethanol cane harvester, Embraer's ethanol aircraft (now certified in Paraguay) and GWM's world-first flex PHEV all signal Brazil's energy technology is becoming an export.</p>
+<p class="lang-pt">O trator etanol de milho da Fendt, o motor etanol da Massey (−90% CO₂), a colhedora de cana etanol da Case IH, o avião etanol da Embraer (certificado no Paraguai) e o PHEV flex da GWM sinalizam que a tecnologia energética brasileira está a tornar-se uma exportação.</p>
+<p class="lang-es">El tractor de etanol de maíz de Fendt, el motor etanol de Massey (−90% CO₂), la cosechadora de caña etanol de Case IH, el avión etanol de Embraer (certificado en Paraguay) y el PHEV flex de GWM señalan que la tecnología energética brasileña se está convirtiendo en una exportación.</p>
+<div class="source-block" style="margin-top:auto;"><span class="src-text lang-en">Source: AGCO / CNH / Embraer / GWM</span><span class="src-text lang-pt">Fonte: AGCO / CNH / Embraer / GWM</span><span class="src-text lang-es">Fuente: AGCO / CNH / Embraer / GWM</span></div>
+</div>
+
+<div class="trend-card">
+<h4>🎯 <span class="lang-en">Precision Economics</span><span class="lang-pt">Economia de Precisão</span><span class="lang-es">Economía de Precisión</span></h4>
+<p class="lang-en">With Harvesters −38.3% and Planters −30.1% in Q1 2026, the dominant pitch is efficiency: Fendt Momentum (−75% overlap), Case IH AI (90% autonomous ops), Jacto JAV (convoy: 1 op/4 machines). Every launch shows ROI not volume.</p>
+<p class="lang-pt">Com Colheitadeiras −38,3% e Plantadeiras −30,1% no 1T2026, o argumento dominante é eficiência: Fendt Momentum (−75% sobreposição), Case IH IA (90% operações autônomas), Jacto JAV (comboio: 1 op/4 máquinas). Cada lançamento mostra ROI, não volume.</p>
+<p class="lang-es">Con Cosechadoras −38.3% y Sembradoras −30.1% en 1T2026, el argumento dominante es eficiencia: Fendt Momentum (−75% superposición), Case IH IA (90% ops autónomas), Jacto JAV (convoy: 1 op/4 máquinas). Cada lanzamiento muestra ROI, no volumen.</p>
+<div class="source-block" style="margin-top:auto;"><span class="src-text lang-en">Source: AEM Q1 2026 / AGCO / CNH / Jacto</span><span class="src-text lang-pt">Fonte: AEM 1T2026 / AGCO / CNH / Jacto</span><span class="src-text lang-es">Fuente: AEM 1T2026 / AGCO / CNH / Jacto</span></div>
+</div>
+
+<div class="trend-card">
+<h4>🌍 <span class="lang-en">Global Innovation, Local Language</span><span class="lang-pt">Inovação Global, Linguagem Local</span><span class="lang-es">Innovación Global, Lenguaje Local</span></h4>
+<p class="lang-en">Valtra's Talking Tractor trained on Brazilian PT/ES data. Jacto's JAV developed for Brazilian citrus. Agritech's AGT 25 built for family farms. Global technology increasingly arrives calibrated, language-ready and culturally aligned for Brazil.</p>
+<p class="lang-pt">O Talking Tractor da Valtra treinado em dados PT/ES brasileiros. O JAV da Jacto desenvolvido para citros brasileiro. O AGT 25 da Agritech construído para a agricultura familiar. A tecnologia global chega cada vez mais calibrada, pronta no idioma e alinhada culturalmente para o Brasil.</p>
+<p class="lang-es">El Talking Tractor de Valtra entrenado en datos PT/ES brasileños. El JAV de Jacto desarrollado para cítricos brasileños. El AGT 25 de Agritech construido para agricultura familiar. La tecnología global llega cada vez más calibrada, lista en el idioma y culturalmente alineada para Brasil.</p>
+<div class="source-block" style="margin-top:auto;"><span class="src-text lang-en">Source: AGCO / Jacto / Agritech</span><span class="src-text lang-pt">Fonte: AGCO / Jacto / Agritech</span><span class="src-text lang-es">Fuente: AGCO / Jacto / Agritech</span></div>
+</div>
+
+<div class="trend-card">
+<h4>🚜 <span class="lang-en">Sugarcane: The New Growth Engine</span><span class="lang-pt">Cana: O Novo Motor de Crescimento</span><span class="lang-es">Caña: El Nuevo Motor de Crecimiento</span></h4>
+<p class="lang-en">Jacto (Hover 500), Baldan (Avola sprayer), Case IH (Austoft 9000 + world's 1st 2-row ethanol harvester), Valtra (M5 sugarcane kit) — every major brand is converging on cane as Brazil's energy transition accelerates planted area and biomass demand.</p>
+<p class="lang-pt">Jacto (Hover 500), Baldan (Avola), Case IH (Austoft 9000 + 1ª colhedora etanol 2 linhas), Valtra (M5 kit canavieiro) — cada grande marca está a convergir para a cana à medida que a transição energética do Brasil acelera a área plantada e a demanda de biomassa.</p>
+<p class="lang-es">Jacto (Hover 500), Baldan (Avola), Case IH (Austoft 9000 + 1ª cosechadora etanol 2 líneas), Valtra (M5 kit cañero) — cada gran marca converge hacia la caña a medida que la transición energética de Brasil acelera el área sembrada y la demanda de biomasa.</p>
+<div class="source-block" style="margin-top:auto;"><span class="src-text lang-en">Source: Canal Rural / Brasilagro / CNH / AGCO</span><span class="src-text lang-pt">Fonte: Canal Rural / Brasilagro / CNH / AGCO</span><span class="src-text lang-es">Fuente: Canal Rural / Brasilagro / CNH / AGCO</span></div>
+</div>
+
+<div class="trend-card">
+<h4>🌱 <span class="lang-en">Carbon & ESG: New Agro Currency</span><span class="lang-pt">Carbono & ESG: Nova Moeda do Agro</span><span class="lang-es">Carbono & ESG: Nueva Moneda del Agro</span></h4>
+<p class="lang-en">Sigma's Carbon Node LI-720, Massey's ethanol engine (−90% CO₂), Embraer's ethanol aircraft and Case IH's ethanol cane harvester all point to a market where carbon accountability is becoming a value driver — not just a regulatory requirement.</p>
+<p class="lang-pt">O Carbon Node LI-720 da Sigma, o motor etanol da Massey (−90% CO₂), o avião etanol da Embraer e a colhedora de cana etanol da Case IH apontam para um mercado onde a responsabilidade de carbono está a tornar-se um motor de valor — não apenas uma exigência regulatória.</p>
+<p class="lang-es">El Carbon Node LI-720 de Sigma, el motor etanol de Massey (−90% CO₂), el avión etanol de Embraer y la cosechadora de caña etanol de Case IH apuntan a un mercado donde la responsabilidad de carbono se está convirtiendo en un motor de valor — no solo un requisito regulatorio.</p>
+<div class="source-block" style="margin-top:auto;"><span class="src-text lang-en">Source: Sigma / AGCO / Embraer / CNH</span><span class="src-text lang-pt">Fonte: Sigma / AGCO / Embraer / CNH</span><span class="src-text lang-es">Fuente: Sigma / AGCO / Embraer / CNH</span></div>
+</div>
+
+</div>
+</section>
+
+<hr class="fancy">
+
+<section id="fotos">
+<p class="section-label"><span class="lang-en">Visual Gallery</span><span class="lang-pt">Galeria Visual</span><span class="lang-es">Galería Visual</span></p>
+<h2>📷 <span class="lang-en">Exclusive Photos - 2026 Coverage</span><span class="lang-pt">Fotografias Exclusivas - Cobertura 2026</span><span class="lang-es">Fotografías Exclusivas - Cobertura 2026</span></h2>
+<div class="photo-grid" id="galeria-estatica">
+<div class="photo-card"><img src="foto (1).jpeg" alt="Agrishow 1"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 1:</strong> Coverage of innovations and equipment.</span><span class="lang-pt"><strong>Registo Visual 1:</strong> Cobertura de inovações e equipamentos.</span><span class="lang-es"><strong>Registro Visual 1:</strong> Cobertura de innovaciones y equipos.</span></div></div>
+<div class="photo-card"><img src="foto (10).jpeg" alt="Agrishow 10"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 10:</strong> Coverage of innovations and equipment.</span><span class="lang-pt"><strong>Registo Visual 10:</strong> Cobertura de inovações e equipamentos.</span><span class="lang-es"><strong>Registro Visual 10:</strong> Cobertura de innovaciones y equipos.</span></div></div>
+<div class="photo-card"><img src="foto (11).jpeg" alt="Agrishow 11"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 11:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 11:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 11:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (12).jpeg" alt="Agrishow 12"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 12:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 12:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 12:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (13).jpeg" alt="Agrishow 13"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 13:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 13:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 13:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (14).jpeg" alt="Agrishow 14"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 14:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 14:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 14:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (15).jpeg" alt="Agrishow 15"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 15:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 15:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 15:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (16).jpeg" alt="Agrishow 16"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 16:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 16:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 16:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (17).jpeg" alt="Agrishow 17"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 17:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 17:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 17:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (18).jpeg" alt="Agrishow 18"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 18:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 18:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 18:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (19).jpeg" alt="Agrishow 19"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 19:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 19:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 19:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (20).jpeg" alt="Agrishow 20"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 20:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 20:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 20:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (21).jpeg" alt="Agrishow 21"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 21:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 21:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 21:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (22).jpeg" alt="Agrishow 22"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 22:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 22:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 22:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (23).jpeg" alt="Agrishow 23"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 23:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 23:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 23:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (24).jpeg" alt="Agrishow 24"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 24:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 24:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 24:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (25).jpeg" alt="Agrishow 25"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 25:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 25:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 25:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (26).jpeg" alt="Agrishow 26"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 26:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 26:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 26:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (27).jpeg" alt="Agrishow 27"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 27:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 27:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 27:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (28).jpeg" alt="Agrishow 28"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 28:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 28:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 28:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (29).jpeg" alt="Agrishow 29"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 29:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 29:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 29:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (30).jpeg" alt="Agrishow 30"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 30:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 30:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 30:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (33).jpeg" alt="Agrishow 33"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 33:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 33:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 33:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (34).jpeg" alt="Agrishow 34"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 34:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 34:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 34:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (35).jpeg" alt="Agrishow 35"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 35:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 35:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 35:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (36).jpeg" alt="Agrishow 36"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 36:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 36:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 36:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (37).jpeg" alt="Agrishow 37"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 37:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 37:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 37:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (38).jpeg" alt="Agrishow 38"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 38:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 38:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 38:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (39).jpeg" alt="Agrishow 39"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 39:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 39:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 39:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (40).jpeg" alt="Agrishow 40"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 40:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 40:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 40:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (41).jpeg" alt="Agrishow 41"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 41:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 41:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 41:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (42).jpeg" alt="Agrishow 42"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 42:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 42:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 42:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (43).jpeg" alt="Agrishow 43"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 43:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 43:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 43:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (44).jpeg" alt="Agrishow 44"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 44:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 44:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 44:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (45).jpeg" alt="Agrishow 45"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 45:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 45:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 45:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (46).jpeg" alt="Agrishow 46"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 46:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 46:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 46:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (47).jpeg" alt="Agrishow 47"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 47:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 47:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 47:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (48).jpeg" alt="Agrishow 48"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 48:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 48:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 48:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (49).jpeg" alt="Agrishow 49"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 49:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 49:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 49:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (50).jpeg" alt="Agrishow 50"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 50:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 50:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 50:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (51).jpeg" alt="Agrishow 51"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 51:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 51:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 51:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (52).jpeg" alt="Agrishow 52"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 52:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 52:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 52:</strong> Cobertura.</span></div></div>
+<div class="photo-card"><img src="foto (53).jpeg" alt="Agrishow 53"><div class="photo-desc"><span class="lang-en"><strong>Visual Record 53:</strong> Coverage.</span><span class="lang-pt"><strong>Registo Visual 53:</strong> Cobertura.</span><span class="lang-es"><strong>Registro Visual 53:</strong> Cobertura.</span></div></div>
+</div>
+<div class="source-block" style="margin-top:24px;"><span class="src-text lang-en">Source: Agrishow 2026 On-site Coverage & Photography</span><span class="src-text lang-pt">Fonte: Cobertura e Fotografia Local - Agrishow 2026</span><span class="src-text lang-es">Fuente: Cobertura y Fotografía Local - Agrishow 2026</span></div>
+</section>
+
+</div>
+
+<footer>
+<strong>Agrishow 2026</strong> · Ribeirão Preto, São Paulo, <span class="lang-en">Brazil</span><span class="lang-pt">Brasil</span><span class="lang-es">Brasil</span> · <span class="lang-en">April 27 – May 1, 2026</span><span class="lang-pt">27 de Abril – 1 de Maio, 2026</span><span class="lang-es">27 de Abril – 1 de Mayo, 2026</span><br>
+<span class="lang-en">Report compiled from official fair releases and specialized industry media. All figures are reported intentions and projections, not finalized transaction values.</span>
+<span class="lang-pt">Relatório compilado a partir de comunicados oficiais da feira e media especializada do setor. Todos os números são intenções e projeções reportadas, não valores de transação finalizados.</span>
+<span class="lang-es">Reporte compilado a partir de comunicados oficiales de la feria y medios especializados de la industria. Todas las cifras son intenciones y proyecciones reportadas, no valores de transacción finalizados.</span><br>
+</footer>
+</body>
+</html>
